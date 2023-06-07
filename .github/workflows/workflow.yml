@@ -35,5 +35,4 @@ jobs:
             JFROG_URL: ${{ github.event.inputs.jfrog-endpoint }}
           run: |
             jf c add --url=$JFROG_URL --access-token=$JFROG_ACCESS_TOKEN
-            jf rt ping
-            
+            jf rt dl dro-misc-assets-local/MultiSite.pdf

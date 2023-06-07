@@ -25,7 +25,7 @@ jobs:
             url: ${{ github.event.inputs.vault-endpoint }}
             role: gh-vault-jfrog-demo
             secrets: |
-              kv-v2/hello foo | DEMO_TOKEN
+              kv-v2/data/hello foo | DEMO_TOKEN
         - name: Use secret from Vault
           run: |
             echo $DEMO_TOKEN

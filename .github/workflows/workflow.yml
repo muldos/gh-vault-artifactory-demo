@@ -20,12 +20,12 @@ jobs:
           uses: jfrog/setup-jfrog-cli@v3
         - name: Retrieve secret from Vault
           uses: hashicorp/vault-action@v2
-            with:
-              method: jwt
-              url: ${{ github.event.inputs.vault-endpoint }}
-              role: gh-vault-jfrog-demo
-              secrets: |
-                kv-v2/hello foo | DEMO_TOKEN
+          with:
+            method: jwt
+            url: ${{ github.event.inputs.vault-endpoint }}
+            role: gh-vault-jfrog-demo
+            secrets: |
+              kv-v2/hello foo | DEMO_TOKEN
         - name: Use secret from Vault
           run: |
             echo $DEMO_TOKEN

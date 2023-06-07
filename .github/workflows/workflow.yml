@@ -1,0 +1,20 @@
+name: "github-oidc-demo"
+on: 
+  workflow_dispatch:
+    inputs:
+      vault-address:
+        required: true
+        type: string
+        description: Public IP to reach the hashicorp vault
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      # Here we install all the tools : docker buildx, QEMU, JDK 11, JFrog CLI
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Setup JFrog CLI
+          uses: jfrog/setup-jfrog-cli@v3
+        - name: Run Maven WAR build 
+          run: |
+            jf --help

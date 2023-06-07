@@ -6,6 +6,10 @@ on:
         required: true
         type: string
         description: Hashicorp vault endpoint
+      jfrog-endpoint:
+          required: true
+          type: string
+          description: JFrog's platform endpoint        
 jobs:
     build:
       runs-on: ubuntu-latest
@@ -26,9 +30,14 @@ jobs:
             role: gh-vault-jfrog-demo
             secrets: |
               kv-v2/data/hello foo | DEMO_TOKEN
+              artifactory/token/gh-devopsacc1 access_token | JFROG_ACCESS_TOKEN
         - name: Use secret from Vault
           run: |
             echo $DEMO_TOKEN
         - name: Run token demo
+          env:
+            JFROG_URL: ${{ github.event.inputs.jfrog-endpoint }}
           run: |
-            jf --help
+            jf c add --url=$JFROG_URL --access-token=$JFROG_ACCESS_TOKEN
+            jf rt ping
+            
